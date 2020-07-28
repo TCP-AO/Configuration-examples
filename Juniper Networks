@@ -1,4 +1,5 @@
 BGP Configuration ( IPV4 and IPV6 ) for TCP AO association:
+----
 
 # show protocols
 bgp {
@@ -38,6 +39,7 @@ policy-statement test_policy {
 }
 
 Keychain Configuration for TCP AO ( Master Key Tuples ):
+----
 
 # show security authentication-key-chains
 key-chain ao_aes_chain {
