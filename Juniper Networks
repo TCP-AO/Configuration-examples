@@ -1,3 +1,6 @@
+This document describes the basic steps needed in order to configure a BGP session using TCP-AO to secure the session.
+
+
 BGP Configuration ( IPV4 and IPV6 ) for TCP AO association:
 ----
 
@@ -5,20 +8,16 @@ BGP Configuration ( IPV4 and IPV6 ) for TCP AO association:
 bgp {
     group ebgp_nokia {
         type external;
-        multihop;
         local-address 116.197.187.117;
         peer-as 38016;
         local-as 10458;
-        tcp-mss 1450;
         neighbor 124.252.255.66 {
             authentication-algorithm ao;
             authentication-key-chain ao_hmac_chain;
-            export test_policy;
         }
     }
     group ebgp_nokia_v6 {
         type external;
-        multihop;
         local-address 2403:8100:1002:103::111;
         peer-as 38016;
         local-as 10458;
@@ -28,14 +27,6 @@ bgp {
             authentication-key-chain ao_aes_chain;
         }
     }
-}
-
-Policy section:
-      
-regress@nsr-infra-a# show policy-options
-policy-statement test_policy {
-    from protocol static;
-    then accept;
 }
 
 Keychain Configuration for TCP AO ( Master Key Tuples ):
