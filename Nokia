@@ -12,7 +12,7 @@ Note: The Unix "date --iso-8601=seconds" command output can be used as the begin
 
 # MD-CLI HMAC-SHA-1-96 Key Configuration
 
-This example create a HMAC-SHA-1-96 key.  Replace "<plain-text>" with key in plain text.
+This example create a HMAC-SHA-1-96 key.  Replace "<plain-text>" with the key in plain text.
 
 /configure system security keychains keychain "hmac-sha-1-96 keychain" tcp-option-number receive tcp-ao
 /configure system security keychains keychain "hmac-sha-1-96 keychain" tcp-option-number send tcp-ao
@@ -38,7 +38,7 @@ This example create a AES-128-CMAC-96 key.  Replace "<plain-text>" with the key 
 
 # MD-CLI BGP Neighbor Configuration
 
-Next, add the key to the BGP session.  The step is the same for IPv4 and IPv6 neighbors, and could also be added to the group instead.
+Next, add the key to the BGP session.  This step is the same for IPv4 and IPv6 neighbors, and could also be added to the group instead.
 
 /configure router "Base" bgp neighbor <ip-address> authentication-keychain <keychain>
 
