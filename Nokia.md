@@ -6,14 +6,15 @@ Enabling TCP-AO is quite simple and has two steps:
 1. Configure the key
 2. Configure the BGP neighbor
 
-More information can be found in the System Management Guide: https://infocenter.nokia.com/public/7750SR205R1A/topic/com.sr.system.mgmt/html/security.html?cp=21_1_4_10#CHDGCGGD
+More information can be found in the [System Management Guide](https://infocenter.nokia.com/public/7750SR205R1A/topic/com.sr.system.mgmt/html/security.html?cp=21_1_4_10#CHDGCGGD).
 
-Note: The Unix "date --iso-8601=seconds" command output can be used as the begin time, if you want the key to be valid now.
+Note: The Unix `date --iso-8601=seconds` command output can be used as the begin time, if you want the key to be valid now.
 
 # MD-CLI HMAC-SHA-1-96 Key Configuration
 
-This example create a HMAC-SHA-1-96 key.  Replace "<plain-text>" with the key in plain text.
+This example create a HMAC-SHA-1-96 key.  Replace `<plain-text>` with the key in plain text.
 
+```
 /configure system security keychains keychain "hmac-sha-1-96 keychain" tcp-option-number receive tcp-ao
 /configure system security keychains keychain "hmac-sha-1-96 keychain" tcp-option-number send tcp-ao
 /configure system security keychains keychain "hmac-sha-1-96 keychain" receive entry 9 authentication-key <plain-text>
@@ -22,11 +23,13 @@ This example create a HMAC-SHA-1-96 key.  Replace "<plain-text>" with the key in
 /configure system security keychains keychain "hmac-sha-1-96 keychain" send entry 2 authentication-key <plain-text>
 /configure system security keychains keychain "hmac-sha-1-96 keychain" send entry 2 algorithm hmac-sha-1-96
 /configure system security keychains keychain "hmac-sha-1-96 keychain" send entry 2 begin-time 2020-07-29T15:47:03-0400
+```
 
 # MD-CLI AES-128-CMAC-96 Key Configuration
 
-This example create a AES-128-CMAC-96 key.  Replace "<plain-text>" with the key in plain text.
+This example create a AES-128-CMAC-96 key.  Replace `<plain-text>` with the key in plain text.
 
+```
 /configure system security keychains keychain "aes-128-cmac-96 keychain" tcp-option-number receive tcp-ao
 /configure system security keychains keychain "aes-128-cmac-96 keychain" tcp-option-number send tcp-ao
 /configure system security keychains keychain "aes-128-cmac-96 keychain" receive entry 9 authentication-key <plain-text>
@@ -35,17 +38,21 @@ This example create a AES-128-CMAC-96 key.  Replace "<plain-text>" with the key 
 /configure system security keychains keychain "aes-128-cmac-96 keychain" send entry 2 authentication-key <plain-text>
 /configure system security keychains keychain "aes-128-cmac-96 keychain" send entry 2 algorithm aes-128-cmac-96
 /configure system security keychains keychain "aes-128-cmac-96 keychain" send entry 2 begin-time 2020-07-29T15:47:03-0400
+```
 
 # MD-CLI BGP Neighbor Configuration
 
 Next, add the key to the BGP session.  This step is the same for IPv4 and IPv6 neighbors, and could also be added to the group instead.
 
+```
 /configure router "Base" bgp neighbor <ip-address> authentication-keychain <keychain>
+```
 
 # Show Command Output
 
 The following show command displays the configured BGP neighbor keychains.
 
+```
 []
 A:grhankin@er1-nyc# show router bgp auth-keychain "interoptest-aes"
 
@@ -60,9 +67,11 @@ Juniper TCP-AO Test
 Juniper TCP-AO Test
     2403:8100:1002:103::111             interoptest-aes
 ===============================================================================
+```
 
-# Configuration Example from June 2020 Interoperability Test with Juniper
+# Complete Configuration Example and Output from June 2020 Interoperability Test with Juniper
 
+```
 /configure system security keychains keychain "interoptest" tcp-option-number receive tcp-ao
 /configure system security keychains keychain "interoptest" tcp-option-number send tcp-ao
 /configure system security keychains keychain "interoptest" receive entry 9 authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
@@ -119,3 +128,4 @@ Def. Instance  10458     3046    0 22h54m14s 0/0/2 (IPv6)
                          2754    0
 
 -------------------------------------------------------------------------------
+```
