@@ -12,7 +12,7 @@ Note: The Unix `date --iso-8601=seconds` command output can be used as the begin
 
 # MD-CLI HMAC-SHA-1-96 Key Configuration
 
-This example create a HMAC-SHA-1-96 key.  Replace `<plain-text>` with the key in plain text.
+This example create an HMAC-SHA-1-96 key.  Replace `<plain-text>` with the key in plain text.
 
 ```
 /configure system security keychains keychain "hmac-sha-1-96 keychain" tcp-option-number receive tcp-ao
@@ -27,7 +27,7 @@ This example create a HMAC-SHA-1-96 key.  Replace `<plain-text>` with the key in
 
 # MD-CLI AES-128-CMAC-96 Key Configuration
 
-This example create a AES-128-CMAC-96 key.  Replace `<plain-text>` with the key in plain text.
+This example create an AES-128-CMAC-96 key.  Replace `<plain-text>` with the key in plain text.
 
 ```
 /configure system security keychains keychain "aes-128-cmac-96 keychain" tcp-option-number receive tcp-ao
