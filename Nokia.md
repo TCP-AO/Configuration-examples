@@ -42,7 +42,7 @@ This example create an AES-128-CMAC-96 key.  Replace `<plain-text>` with the key
 
 # MD-CLI BGP Neighbor Configuration
 
-Next, add the key to the BGP session.  This step is the same for IPv4 and IPv6 neighbors, and could also be added to the group instead.
+Next, add the key to the BGP session.  This step is the same for IPv4 and IPv6 neighbors, and could also be added to the group instead of to the neighbor.
 
 ```
 /configure router "Base" bgp neighbor <ip-address> authentication-keychain <keychain>
