@@ -6,7 +6,7 @@ Enabling TCP-AO is quite simple and has two steps:
 1. Configure the key
 2. Configure the BGP neighbor
 
-1. Keychain Configuration for TCP AO ( Master Key Tuples ):
+Keychain Configuration for TCP AO ( Master Key Tuples ):
 ----
 
 ```
@@ -39,7 +39,7 @@ key-chain ao_hmac_chain {
 }
 ```
 
-2. BGP Configuration ( IPV4 and IPV6 ) for TCP AO association:
+BGP Configuration ( IPV4 and IPV6 ) for TCP AO association:
 ----
 ```
 # show protocols
