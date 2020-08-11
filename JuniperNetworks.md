@@ -3,7 +3,7 @@ This document describes the basic steps needed in order to configure a BGP sessi
 
 BGP Configuration ( IPV4 and IPV6 ) for TCP AO association:
 ----
-
+```
 # show protocols
 bgp {
     group ebgp_nokia {
@@ -28,10 +28,12 @@ bgp {
         }
     }
 }
+```
 
 Keychain Configuration for TCP AO ( Master Key Tuples ):
 ----
 
+```
 # show security authentication-key-chains
 key-chain ao_aes_chain {
     key 0 {
@@ -59,3 +61,4 @@ key-chain ao_hmac_chain {
         }
     }
 }
+```
