@@ -1,6 +1,6 @@
 # Introduction
 
-This document describes the basic steps needed in order to configure a BGP session using TCP-AO to secure the session.  This configuration is applicable to Nokia SR OS 20.5.R1 and newer versions.
+This document describes the basic steps needed in order to configure a BGP session using TCP-AO to secure the session.  This MD-CLI configuration example is applicable to Nokia SR OS 16.0.R15, 19.10.R7, 20.5.R1 and newer versions.  The classic CLI configuration is similar.
 
 Enabling TCP-AO is quite simple and has two steps: 
 1. Configure the key
