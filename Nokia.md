@@ -72,40 +72,105 @@ Juniper TCP-AO Test
 # Complete Configuration Example and Output from June 2020 Interoperability Test with Juniper
 
 ```
-/configure system security keychains keychain "interoptest" tcp-option-number receive tcp-ao
-/configure system security keychains keychain "interoptest" tcp-option-number send tcp-ao
-/configure system security keychains keychain "interoptest" receive entry 9 authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
-/configure system security keychains keychain "interoptest" receive entry 9 algorithm hmac-sha-1-96
-/configure system security keychains keychain "interoptest" receive entry 9 begin-time 2020-01-06T17:35:59.0-05:00
-/configure system security keychains keychain "interoptest" send entry 2 authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
-/configure system security keychains keychain "interoptest" send entry 2 algorithm hmac-sha-1-96
-/configure system security keychains keychain "interoptest" send entry 2 begin-time 2020-01-06T17:35:59.0-05:00
-/configure system security keychains keychain "interoptest-aes" tcp-option-number receive tcp-ao
-/configure system security keychains keychain "interoptest-aes" tcp-option-number send tcp-ao
-/configure system security keychains keychain "interoptest-aes" receive entry 9 authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
-/configure system security keychains keychain "interoptest-aes" receive entry 9 algorithm aes-128-cmac-96
-/configure system security keychains keychain "interoptest-aes" receive entry 9 begin-time 2020-06-09T00:00:00.0-04:00
-/configure system security keychains keychain "interoptest-aes" send entry 2 authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
-/configure system security keychains keychain "interoptest-aes" send entry 2 algorithm aes-128-cmac-96
-/configure system security keychains keychain "interoptest-aes" send entry 2 begin-time 2020-06-09T00:00:00.0-04:00
-
-/configure policy-options policy-statement "RP_EXPORT_10458" entry 10 from protocol name [direct]
-/configure policy-options policy-statement "RP_EXPORT_10458" entry 10 to protocol name [bgp]
-
-/configure router "Base" bgp neighbor "116.197.187.117" authentication-keychain "interoptest-aes"
-/configure router "Base" bgp neighbor "116.197.187.117" group "Juniper TCP-AO Test"
-/configure router "Base" bgp neighbor "116.197.187.117" multihop 255
-/configure router "Base" bgp neighbor "116.197.187.117" local-address 124.252.255.66
-/configure router "Base" bgp neighbor "116.197.187.117" peer-as 10458
-/configure router "Base" bgp neighbor "116.197.187.117" family ipv4 true
-/configure router "Base" bgp neighbor "116.197.187.117" export policy ["RP_EXPORT_10458"]
-/configure router "Base" bgp neighbor "2403:8100:1002:103::111" authentication-keychain "interoptest-aes"
-/configure router "Base" bgp neighbor "2403:8100:1002:103::111" group "Juniper TCP-AO Test"
-/configure router "Base" bgp neighbor "2403:8100:1002:103::111" multihop 255
-/configure router "Base" bgp neighbor "2403:8100:1002:103::111" local-address 2406:c800:e000:1::2
-/configure router "Base" bgp neighbor "2403:8100:1002:103::111" peer-as 10458
-/configure router "Base" bgp neighbor "2403:8100:1002:103::111" family ipv6 true
-/configure router "Base" bgp neighbor "2403:8100:1002:103::111" export policy ["RP_EXPORT_10458"]
+configure {
+    system {
+        security {
+            keychains {
+                keychain "interoptest" {
+                    tcp-option-number {
+                        receive tcp-ao
+                        send tcp-ao
+                    }
+                    receive {
+                        entry 9 {
+                            authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
+                            algorithm hmac-sha-1-96
+                            begin-time 2020-01-06T22:35:59.0Z
+                        }
+                    }
+                    send {
+                        entry 2 {
+                            authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
+                            algorithm hmac-sha-1-96
+                            begin-time 2020-01-06T22:35:59.0Z
+                        }
+                    }
+                }
+                keychain "interoptest-aes" {
+                    tcp-option-number {
+                        receive tcp-ao
+                        send tcp-ao
+                    }
+                    receive {
+                        entry 9 {
+                            authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
+                            algorithm aes-128-cmac-96
+                            begin-time 2020-06-09T04:00:00.0Z
+                        }
+                    }
+                    send {
+                        entry 2 {
+                            authentication-key "yzClLKIFsAVR91AobUXUT/ppPzL7bVxBrNNg" hash
+                            algorithm aes-128-cmac-96
+                            begin-time 2020-06-09T04:00:00.0Z
+                        }
+                    }
+                }
+            }
+        }
+    }
+    policy-options {
+        policy-statement "RP_EXPORT_10458" {
+            entry 10 {
+                from {
+                    protocol {
+                        name [direct]
+                    }
+                }
+                to {
+                    protocol {
+                        name [bgp]
+                    }
+                }
+                action {
+                    action-type accept
+                }
+            }
+        }
+    }
+    router "Base" {
+        bgp {
+            group "Juniper TCP-AO Test" {
+            }
+            neighbor "116.197.187.117" {
+                authentication-keychain "interoptest-aes"
+                group "Juniper TCP-AO Test"
+                multihop 255
+                local-address 124.252.255.66
+                peer-as 10458
+                family {
+                    ipv4 true
+                }
+                export {
+                    policy ["RP_EXPORT_10458"]
+                }
+            }
+            neighbor "2403:8100:1002:103::111" {
+                authentication-keychain "interoptest-aes"
+                group "Juniper TCP-AO Test"
+                multihop 255
+                local-address 2406:c800:e000:1::2
+                peer-as 10458
+                family {
+                    ipv6 true
+                }
+                export {
+                    policy ["RP_EXPORT_10458"]
+                }
+            }
+        }
+    }
+}
 
 []
 A:grhankin@er1-nyc# show router bgp summary all
