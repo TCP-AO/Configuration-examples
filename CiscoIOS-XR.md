@@ -23,7 +23,7 @@ This topology of this test:
 
 ### Configuration for XR-a
 ```buildoutcfg
-key chain kcTCO-AO-1
+key chain kcTCP-AO-1
  key 0
   accept-lifetime 00:00:00 june 28 2021 infinite
   key-string password 
@@ -36,7 +36,7 @@ key chain kcTCO-AO-1
 
 ```buildoutcfg
 tcp ao
- keychain kcTCO-AO-1
+ keychain kcTCP-AO-1
   key 0 SendID 0 ReceiveID 0
  !
 !
@@ -51,7 +51,7 @@ router bgp 64501
  !
  neighbor 172.16.12.2
   remote-as 64502
-  ao kcTCO-AO-1 include-tcp-options enable
+  ao kcTCP-AO-1 include-tcp-options enable
   address-family ipv4 unicast
   !
  !
@@ -63,7 +63,7 @@ To verify:
 RP/0/RP0/CPU0:XR702-a#show tcp authentication keychain all
 Tue Jun 29 22:05:34.922 EDT
 
-Keychain name: kcTCO-AO-1, configured for tcp-ao
+Keychain name: kcTCP-AO-1, configured for tcp-ao
 Desired key: 0
 Total number of keys: 1
 Key details:
